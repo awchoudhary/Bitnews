@@ -7,7 +7,7 @@ def parse_coindesk(html):
     link_tags = []
 
     for div in post_divs:
-        link_tags.extend(div.find_all("a", {"class": "fade"}))
+        link_tags.append(div.find("a", {"class": "fade"}))
 
     articles = []
     Article = namedtuple('Article', 'title link')
