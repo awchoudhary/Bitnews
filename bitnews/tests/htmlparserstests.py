@@ -9,24 +9,17 @@ class HtmlParsersTests(unittest.TestCase):
     def test_parse_coindesk(self):
         #Arrange
         html = """
-                <div class="main-feature">
-                    <div class="article article-featured">
-                        <a class="fade" href="https://www.coindesk.com/crypto-unicorn-bitmain-weighs-18-billion-ipo-one-of-worlds-largest/" title="Crypto Unicorn Bitmain Weighs $18 Billion IPO, One of World's Largest">
-                            <div class="picture">
-                                <img width="1500" height="1000" src="https://media.coindesk.com/uploads/2018/08/jihan-consensus-e1533904640187.jpg" class="attachment-full size-full wp-post-image" alt="" /> 
-                            </div>
-                            <div class="article-meta">
-                                <h3 class="featured-article-title">Crypto Unicorn Bitmain Weighs $18 Billion IPO, One of World's Largest</h3>
-                                <p class="timeauthor">
-                                <time datetime="2018-08-10T17:00:48+00:00">Aug 10, 2018</time> by Ada Hui 
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="post-info">
+                    <h3><a class="fade" href='https://www.coindesk.com/fincen-says-it-now-receives-1500-crypto-complaints-a-month/' title='FinCEN Says It Now Receives 1,500 Crypto Complaints a Month'>FinCEN Says It Now Receives 1,500 Crypto Complaints a Month</a></h3>
+                    <p class="timeauthor"><time datetime="2018-08-10T19:10:42+00:00">Aug 10, 2018 at 19:10</time> | <cite>
+                        <a href="https://www.coindesk.com/author/mshen/" title="Posts by Muyao Shen" class="author url fn" rel="author">Muyao Shen</a> </cite>
+                    </p>
+                    <p>FinCEN receives more than 1,500 reports every month from financial institutions regarding cryptocurrencies, a top official said Thursday.</p>
                 </div>
+                
                 """
-        link = "https://www.coindesk.com/crypto-unicorn-bitmain-weighs-18-billion-ipo-one-of-worlds-largest/"
-        title = "Crypto Unicorn Bitmain Weighs $18 Billion IPO, One of World's Largest"
+        link = "https://www.coindesk.com/fincen-says-it-now-receives-1500-crypto-complaints-a-month/"
+        title = "FinCEN Says It Now Receives 1,500 Crypto Complaints a Month"
         
         #act
         articles = htmlparsers.parse_coindesk(html)
@@ -35,7 +28,6 @@ class HtmlParsersTests(unittest.TestCase):
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].title, title)
         self.assertEqual(articles[0].link, link)
-
 
 if __name__ == '__main__':
     unittest.main()

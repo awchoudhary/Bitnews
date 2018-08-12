@@ -4,7 +4,7 @@ from yattag import Doc
 
 doc, tag, text = Doc().tagtext()
 
-url_map = {"coin desk": "https://www.coindesk.com/"}
+url_map = {"coindesk": "https://www.coindesk.com/"}
 
 def get_all_articles_links_in_html():
     articles_map = {}

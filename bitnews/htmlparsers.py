@@ -3,7 +3,12 @@ from collections import namedtuple
 
 def parse_coindesk(html):
     soup = BeautifulSoup(html, "html.parser")
-    link_tags = soup.findAll("a", {"class": "fade"})
+    post_divs = soup.find_all("div", {"class": "post-info"})
+    link_tags = []
+
+    for div in post_divs:
+        link_tags.extend(div.find_all("a", {"class": "fade"}))
+
     articles = []
     Article = namedtuple('Article', 'title link')
 
@@ -13,7 +18,7 @@ def parse_coindesk(html):
 
     return articles
 
-dispatcher = {"coin desk": parse_coindesk}
+dispatcher = {"coindesk": parse_coindesk}
 
 
 
