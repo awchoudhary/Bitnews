@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 from collections import namedtuple
 
-dispatcher = {"coindesk": parse_coindesk}
-
 def parse_coindesk(html):
     soup = BeautifulSoup(html, "html.parser")
     link_tags = soup.findAll("a", {"class": "fade"})
@@ -14,6 +12,8 @@ def parse_coindesk(html):
         articles.append(article_info)
 
     return articles
+
+dispatcher = {"coindesk": parse_coindesk}
 
 
 
