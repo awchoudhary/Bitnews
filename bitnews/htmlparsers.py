@@ -8,12 +8,12 @@ def parse_coindesk(html):
     Article = namedtuple('Article', 'title link')
 
     for tag in link_tags:
-        article_info = Article(tag["title"], tag["href"])
+        article_info = Article(tag.text.strip(), tag["href"])
         articles.append(article_info)
 
     return articles
 
-dispatcher = {"coindesk": parse_coindesk}
+dispatcher = {"coin desk": parse_coindesk}
 
 
 
