@@ -7,6 +7,8 @@ def get_articles_containing_words(articles, words):
         build_word_to_articles_map(articles)
 
     for word in words:
+        word = word.lower()
+        
         if(word in word_to_articles_map):
             found_articles.update(word_to_articles_map[word])
 
@@ -17,6 +19,8 @@ def build_word_to_articles_map(articles):
         words_in_title = article.title.split()
         
         for word in words_in_title:
+            word = word.lower()
+
             if(not word in word_to_articles_map):
                 word_to_articles_map[word] = []
 
