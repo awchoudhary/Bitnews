@@ -2,16 +2,14 @@ import requests
 import htmlparsers
 from yattag import Doc
 
-doc, tag, text = Doc().tagtext()
-
 url_map = {"coindesk": "https://www.coindesk.com/"}
+articles_map = {}
 
-def get_all_articles_links_in_html():
-    articles_map = {}
-
-    for site_name, url in url_map.items():
-        articles = scrape_articles(site_name, url)
-        articles_map[site_name] = articles
+def get_all_articles():
+    if(not articles_map):
+        for site_name, url in url_map.items():
+            articles = scrape_articles(site_name, url)
+            articles_map[site_name] = articles
 
     response = generate_html(articles_map)
 
@@ -26,6 +24,7 @@ def scrape_articles(key, url):
     return articles
     
 def generate_html(articles_with_source):
+    doc, tag, text = Doc().tagtext()
     html = []
 
     for site_name, articles in articles_with_source.items():
