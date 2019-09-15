@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Bitnews</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .outer-search-bar-container {
+            width: 100%;
+            height: 100px;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            left: 0;
+            background-color: #eeeeee;
+            display: flex;
+            align-items: center; 
+        }
+        .search {
+            width: 100%;
+            position: relative
+        }
+        .searchTerm {
+            float: left;
+            width: 100%;
+            border: 3px solid #bcbcbc;
+            padding: 5px;
+            height: 20px;
+            border-radius: 5px;
+            outline: none;
+            font-size: 12px;
+        }
+        .searchTerm:focus {
+            color: #29434e;
+        }
+        .searchButton {
+            position: absolute;  
+            right: -50px;
+            width: 40px;
+            height: 36px;
+            border: 1px solid #bcbcbc;
+            background: #bcbcbc;
+            text-align: center;
+            color: #eeeeee;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .wrap {
+            width: 30%;
+            margin: 20px;
+        }
+        .items {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        .item a:link {
+            text-decoration: none;
+        }
+        .item a:visited {
+            text-decoration: none;
+        }
+        .item a:hover {
+            text-decoration: underline;
+        }
+
+        .item a:active {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class='outer-search-bar-container'>
+        <div class="wrap">
+            <div class="search">
+                <form action="/search" method="GET">
+                    <input type="text" class="searchTerm" placeholder="Search for articles" name="q">
+                    <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        {% for article in articles %} 
+            <div class="item">
+                <a href={{article.link}}>{{article.title}}</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

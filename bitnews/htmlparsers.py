@@ -3,17 +3,16 @@ from collections import namedtuple
 
 def parse_coindesk(html):
     soup = BeautifulSoup(html, "html.parser")
-    post_divs = soup.find_all("div", {"class": "post-info"})
-    link_tags = []
-
-    for div in post_divs:
-        link_tags.extend(div.find_all("a", {"class": "fade"}))
+    article_link_elements = []
+    article_link_elements += soup.find_all("a", {"class": "stream-article"})
+    article_link_elements += soup.find_all("a", {"class": "top-article"})
+    article_link_elements += soup.find_all("a", {"class": "feature"})
 
     articles = []
-    Article = namedtuple('Article', 'title link')
+    Article = namedtuple('Article', 'source title link')
 
-    for tag in link_tags:
-        article_info = Article(tag.text.strip(), tag["href"])
+    for tag in article_link_elements:
+        article_info = Article("coindesk", tag["title"], tag["href"])
         articles.append(article_info)
 
     return articles
