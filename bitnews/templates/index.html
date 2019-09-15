@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Bitnews</title>
@@ -53,7 +54,7 @@
         }
         .wrap {
             width: 30%;
-            margin: 20px;
+            margin: 10px;
         }
         .items {
             margin-top: 10px;
@@ -74,6 +75,12 @@
 
         .item a:active {
             text-decoration: underline;
+        }
+
+        @media only screen and (max-width: 580px) {
+            .wrap {
+                width: 80%;
+            }
         }
     </style>
 </head>
@@ -97,5 +104,5 @@
             </div>
         {% endfor %}
     </div>
-</body>
+ </body>
 </html>
