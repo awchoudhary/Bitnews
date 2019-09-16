@@ -11,16 +11,6 @@
             margin: 0;
             font-family: 'Roboto', sans-serif;
         }
-        .outer-search-bar-container {
-            width: 100%;
-            height: 100px;
-            margin: 0;
-            padding: 0;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center; 
-        }
         .searchTerm {
             width: 100%;
             padding: 5px;
@@ -40,8 +30,8 @@
             margin-right: 10px;
         }
         .wrap {
-            width: 30%;
-            margin: 10px;
+            width: 40%;
+            margin: 20px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -50,8 +40,8 @@
             align-items: center;
         }
         .items {
-            margin-top: 10px;
-            margin-left: 10px;
+            margin-top: 20px;
+            margin-left: 20px;
         }
         .item {
             margin-bottom: 10px;
@@ -78,13 +68,11 @@
     </style>
 </head>
 <body>
-    <div class='outer-search-bar-container'>
-        <div class="wrap">
-            <form action="/search" method="GET" class="searchForm">
-                <input type="text" class="searchTerm" placeholder="Search for articles" name="q">
-            </form>
-            <i class="fa fa-search searchButton"></i>
-        </div>
+    <div class="wrap">
+        <form action="/search" method="GET" class="searchForm">
+            <input type="text" class="searchTerm" placeholder="Search for articles" name="q">
+        </form>
+        <i class="fa fa-search searchButton"></i>
     </div>
     <div class="items">
         {% for article in articles %} 
