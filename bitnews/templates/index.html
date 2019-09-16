@@ -11,7 +11,7 @@
             margin: 0;
             font-family: 'Roboto', sans-serif;
         }
-        .searchTerm {
+        .searchInput {
             width: 100%;
             padding: 5px;
             height: 20px;
@@ -29,7 +29,7 @@
             flex-shrink: 0;
             margin-right: 10px;
         }
-        .wrap {
+        .searchBar {
             width: 40%;
             margin: 20px;
             display: flex;
@@ -61,16 +61,16 @@
         }
 
         @media only screen and (max-width: 850px) {
-            .wrap {
+            .searchBar {
                 width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="wrap">
+    <div class="searchBar">
         <form action="/search" method="GET" class="searchForm">
-            <input type="text" class="searchTerm" placeholder="Search for articles" name="q">
+            <input type="text" class="searchInput" placeholder="Search for articles" name="q">
         </form>
         <i class="fa fa-search searchButton"></i>
     </div>
