@@ -17,6 +17,9 @@ def search():
     if query_string == '':
         return render_template('index.html', articles = all_articles)
 
-    found_articles = articlesearcher.get_articles_containing_words(all_articles, query_string.split())
+    found_articles = articlesearcher.get_articles_containing_words(all_articles,\
+        query_string)
+    
+    print(found_articles, flush=True)
 
     return render_template('index.html', articles = found_articles)
