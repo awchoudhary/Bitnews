@@ -9,7 +9,7 @@ itsdangerous==0.24
 Jinja2==2.10.1
 MarkupSafe==1.0
 requests==2.22.0
-urllib3==1.25.3
+urllib3==1.25.5
 Werkzeug==0.15.6
 Whoosh==2.7.4
 yattag==1.10.0
