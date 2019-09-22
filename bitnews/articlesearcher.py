@@ -1,27 +1,43 @@
-word_to_articles_map = {}
+import os
+from whoosh.index import create_in
+from whoosh.fields import Schema, TEXT, ID
+from whoosh.qparser import QueryParser
+from whoosh.qparser import OrGroup
+from whoosh import scoring
+from whoosh.index import open_dir
+import sys
+import shutil
+
+article_map = {}
 
 def get_articles_containing_words(articles, words):
     found_articles = set()
 
-    if(not word_to_articles_map):
-        build_word_to_articles_map(articles)
+    if(not article_map):
+        create_corpus(articles)
+        build_article_map(articles)
 
-    for word in words:
-        word = word.lower()
-        
-        if(word in word_to_articles_map):
-            found_articles.update(word_to_articles_map[word])
-
+    ix = open_dir("indexdir")
+    query = QueryParser("title", ix.schema, group=OrGroup).parse(words)
+    with ix.searcher() as searcher:
+        results = searcher.search(query)
+        for result in results:
+            found_articles.update([article_map[result['id']]])
+    
     return found_articles
 
-def build_word_to_articles_map(articles):
+def build_article_map(articles):
     for article in articles:
-        words_in_title = article.title.split()
-        
-        for word in words_in_title:
-            word = word.lower()
+        article_map[article.id] = article
 
-            if(not word in word_to_articles_map):
-                word_to_articles_map[word] = []
-
-            word_to_articles_map[word].append(article)
+def create_corpus(articles):
+    schema = Schema(title=TEXT,id=ID(stored=True),source=TEXT(stored=True))
+    if os.path.exists("indexdir"):
+        shutil.rmtree("indexdir")
+    os.mkdir("indexdir")
+    ix = create_in("indexdir", schema)
+    writer = ix.writer()
+    for article in articles:
+        writer.add_document(title=article.title, id=article.id,\
+          source=article.source)
+    writer.commit()
