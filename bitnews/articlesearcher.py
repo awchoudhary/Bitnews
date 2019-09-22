@@ -19,7 +19,7 @@ def get_articles_containing_words(articles, words):
 
     ix = open_dir("indexdir")
     query = QueryParser("title", ix.schema, group=OrGroup).parse(words)
-    with ix.searcher(weighting=scoring.Frequency) as searcher:
+    with ix.searcher() as searcher:
         results = searcher.search(query)
         for result in results:
             found_articles.update([article_map[result['id']]])
