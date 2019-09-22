@@ -2,6 +2,7 @@ import os
 from whoosh.index import create_in
 from whoosh.fields import Schema, TEXT, ID
 from whoosh.qparser import QueryParser
+from whoosh.qparser import OrGroup
 from whoosh import scoring
 from whoosh.index import open_dir
 import sys
@@ -17,7 +18,7 @@ def get_articles_containing_words(articles, words):
         build_article_map(articles)
 
     ix = open_dir("indexdir")
-    query = QueryParser("title", ix.schema).parse(words)
+    query = QueryParser("title", ix.schema, group=OrGroup).parse(words)
     with ix.searcher(weighting=scoring.Frequency) as searcher:
         results = searcher.search(query)
         for result in results:
